@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Тарифы на обучение - Школа Английского{% endblock %} {# Изменили Title #}
+
+{% block head_extra %}
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-4 pricing-title animate__animated animate__fadeInUp">Наши Тарифы</h1> {# Изменили Заголовок #}
+    <p class="lead text-center mb-5 animate__animated animate__fadeInUp" data-aos-delay="100">
+        Выберите удобный формат онлайн-обучения.
+    </p>
+
+    {# Убираем row-cols-md-2, чтобы карточки были по центру, если их мало #}
+    {# Используем justify-content-center для центрирования #}
+    <div class="row row-cols-1 row-cols-lg-2 g-4 justify-content-center">
+        {% for key, value in prices.items() %}
+        <div class="col d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="{{ loop.index0 * 100 }}">
+            <div class="card h-100 shadow-sm price-card">
+                <div class="card-body d-flex flex-column">
+                    {# Используем новое поле title #}
+                    <h5 class="card-title price-card-title">{{ value.title }}</h5>
+
+                    {# Описание #}
+                    <p class="price-card-description">{{ value.description }}</p>
+
+                    {# Блок с ценами #}
+                    <div class="price-block mb-3">
+                        <span class="current-price display-5 fw-bold">{{ value.price }}</span>
+                        <span class="price-unit">{{ value.unit }}</span>
+                        {# Показываем старую цену, если она есть #}
+                        {% if value.old_price %}
+                        <span class="old-price text-muted ms-2"><del>{{ value.old_price }} {{ value.unit }}</del></span>
+                        {% endif %}
+                    </div>
+
+                    {# Убираем дисклеймер про точную стоимость, т.к. цена указана #}
+                    {# <p class="text-muted small">*Точная стоимость зависит...</p> #}
+
+                    {# Контейнер для кнопки внизу #}
+                    <div class="mt-auto">
+                        {# Можно изменить текст кнопки или ссылку #}
+                        <a href="#" class="btn btn-primary price-card-button" data-bs-toggle="modal" data-bs-target="#callbackModal">Записаться</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="alert alert-info mt-5 text-center" role="alert" data-aos="fade-up">
+       <i class="bi bi-question-circle me-2"></i> Остались вопросы? <a href="#" data-bs-toggle="modal" data-bs-target="#callbackModal" class="alert-link">Закажите обратный звонок</a> для консультации!
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts_extra %}
+{# Подключаем AOS JS, если он не подключен глобально в base.html или script.js #}
+{# <script src="https://unpkg.com/aos@next/dist/aos.js"></script> #}
+{# <script> #}
+    {# Инициализация AOS, если она не глобальная #}
+    {# AOS.init({ duration: 1000, once: true }); #}
+{# </script> #}
+{% endblock %}

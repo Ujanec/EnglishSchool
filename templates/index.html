@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}Добро пожаловать! - Школа Английского{% endblock %}
+
+{% block head_extra %}
+{# Ссылка на стили для анимации при прокрутке (AOS) #}
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+{# Ссылка на стили для иконок Bootstrap #}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+{% endblock %}
+
+{% block content %}
+
+<!-- ==== Секция Hero ==== -->
+<div class="px-4 py-5 my-5 text-center animate__animated animate__fadeIn hero-section">
+    <img class="d-block mx-auto mb-4 logo-image" src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" width="80"> <!-- Убедитесь, что logo.png есть в static/img -->
+    <h1 class="display-5 fw-bold text-body-emphasis main-heading">Откройте Мир с Английским!</h1>
+    <div class="col-lg-7 mx-auto">
+        <p class="lead mb-4 promo-text">Современные методики, опытные преподаватели и гибкий график в нашей школе в Москве. Начните говорить свободно уже сегодня!</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="{{ url_for('pricing') }}" type="button" class="btn btn-primary btn-lg px-4 gap-3 call-to-action-btn">Узнать цены</a>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#callbackModal">Записаться на пробный урок</button>
+        </div>
+    </div>
+    <!-- Декоративный элемент (треугольник) -->
+    <div class="decorative-shape triangle-1"></div>
+</div>
+
+{# Скрытый разделитель, если не нужен стандартный вид #}
+<hr class="my-5 visually-hidden">
+
+<!-- ==== Секция о Создателе ==== -->
+<section class="container py-5 founder-section" id="founder" data-aos="fade-up">
+    <!-- Убедитесь, что у этого div.row есть класс align-items-center -->
+    <div class="row align-items-center">
+        <div class="col-md-4 text-center">
+            <div class="founder-photo-container">
+                <img src="{{ url_for('static', filename='img/founder.jpg') }}" alt="Фото основателя [Имя Фамилия]" class="founder-photo-img img-fluid">
+            </div>
+        </div>
+        <div class="col-md-8">
+            <!-- Текст здесь -->
+            <h2 class="founder-name mb-3">Познакомьтесь с Лилией Арутюнян</h2>
+            <p class="founder-bio">
+                Привет! Меня зовут Лилия, и я основатель этой школы. Моя страсть — помогать людям открывать новые возможности через изучение английского языка.
+                Имея 20 лет опыта преподавания и сертификаты CELTA, TESOL, IELTS и GRE я разработала методику, которая фокусируется на живом общении и быстром преодолении языкового барьера.
+                Я верю, что учить английский можно с удовольствием и видимым результатом. Присоединяйтесь к нам!
+            </p>
+            <!-- Ссылка-кнопка с иконкой -->
+            <a href="#" class="btn btn-outline-primary btn-sm">Читать больше <i class="bi bi-arrow-right-short"></i></a>
+        </div>
+    </div>
+    <!-- Декоративный элемент -->
+    <div class="decorative-shape triangle-2"></div>
+</section>
+
+{# Стандартный разделитель для визуального отделения секций #}
+<hr class="my-5">
+
+<!-- ==== Секция Преимуществ (с иконками Bootstrap) ==== -->
+<section class="container py-5 features-section">
+    <div class="row g-4 row-cols-1 row-cols-lg-3">
+        <div class="col d-flex align-items-start" data-aos="fade-up" data-aos-delay="0">
+            <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                 <i class="bi bi-camera-video"></i> <!-- Иконка Bootstrap -->
+            </div>
+            <div>
+                <h3 class="fs-2 text-body-emphasis feature-title">Онлайн и Офлайн</h3>
+                <p class="feature-text">Занимайтесь где удобно: в наших уютных классах в Москве или онлайн из любой точки мира.</p>
+            </div>
+        </div>
+        <div class="col d-flex align-items-start" data-aos="fade-up" data-aos-delay="100">
+             <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <i class="bi bi-people"></i> <!-- Иконка Bootstrap -->
+            </div>
+            <div>
+                <h3 class="fs-2 text-body-emphasis feature-title">Индивидуально и в Группе</h3>
+                <p class="feature-text">Выберите формат, который подходит именно вам: персональные уроки или динамичные групповые занятия.</p>
+            </div>
+        </div>
+        <div class="col d-flex align-items-start" data-aos="fade-up" data-aos-delay="200">
+             <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <i class="bi bi-graph-up-arrow"></i> <!-- Иконка Bootstrap -->
+            </div>
+            <div>
+                <h3 class="fs-2 text-body-emphasis feature-title">Заметный Результат</h3>
+                <p class="feature-text">Наши методики и опытные преподаватели помогут вам достичь ваших целей в изучении английского.</p>
+            </div>
+        </div>
+    </div>
+     <!-- Декоративный элемент -->
+    <div class="decorative-shape triangle-3"></div>
+</section>
+
+{# Стандартный разделитель #}
+<hr class="my-5">
+
+<!-- ==== Секция "Почему Мы?" ==== -->
+<section class="container py-5 text-center why-us-section" id="why-us" data-aos="zoom-in">
+    <h2 class="display-6 fw-bold mb-5 why-us-heading">Почему стоит выбрать именно нас?</h2>
+    <p class="lead col-lg-8 mx-auto mb-5">Мы не просто учим грамматике. Мы помогаем вам <span class="highlight-text">заговорить</span> и <span class="highlight-text">полюбить</span> английский язык!</p>
+
+    <div class="row g-4 text-start">
+        <div class="col-md-6 col-lg-4" data-aos="fade-right">
+            <div class="benefit-item p-4 rounded shadow-sm h-100">
+                <div class="benefit-icon fs-2 mb-3 text-primary"><i class="bi bi-chat-dots-fill"></i></div>
+                <h4 class="benefit-title">Фокус на Разговоре</h4>
+                <p class="benefit-text">С первого урока вы начнете говорить. Минимум скучной теории, максимум живой практики и реальных диалогов.</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <div class="benefit-item p-4 rounded shadow-sm h-100">
+                <div class="benefit-icon fs-2 mb-3 text-primary"><i class="bi bi-person-check-fill"></i></div>
+                <h4 class="benefit-title">Опытные Учителя</h4>
+                <p class="benefit-text">Наши преподаватели – не просто носители языка или лингвисты, а увлеченные профессионалы, которые умеют мотивировать.</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4" data-aos="fade-left">
+             <div class="benefit-item p-4 rounded shadow-sm h-100">
+                <div class="benefit-icon fs-2 mb-3 text-primary"><i class="bi bi-calendar-check-fill"></i></div>
+                <h4 class="benefit-title">Гибкий График</h4>
+                <p class="benefit-text">Подстроим расписание под ваш ритм жизни. Занимайтесь утром, днем, вечером или по выходным – онлайн или у нас в центре.</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4" data-aos="fade-right" data-aos-delay="100">
+            <div class="benefit-item p-4 rounded shadow-sm h-100">
+                <div class="benefit-icon fs-2 mb-3 text-primary"><i class="bi bi-emoji-smile-fill"></i></div>
+                <h4 class="benefit-title">Дружелюбная Атмосфера</h4>
+                <p class="benefit-text">Забудьте про страх ошибки! Мы создаем комфортную и поддерживающую обстановку, где учиться легко и приятно.</p>
+            </div>
+        </div>
+         <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="benefit-item p-4 rounded shadow-sm h-100">
+                <div class="benefit-icon fs-2 mb-3 text-primary"><i class="bi bi-lightbulb-fill"></i></div>
+                <h4 class="benefit-title">Современные Методы</h4>
+                <p class="benefit-text">Используем интерактивные платформы, актуальные материалы, игры и коммуникативный подход – чтобы было нескучно!</p>
+            </div>
+        </div>
+         <div class="col-md-6 col-lg-4" data-aos="fade-left" data-aos-delay="100">
+            <div class="benefit-item p-4 rounded shadow-sm h-100">
+                <div class="benefit-icon fs-2 mb-3 text-primary"><i class="bi bi-geo-alt-fill"></i></div>
+                <h4 class="benefit-title">Удобное Расположение</h4>
+                <p class="benefit-text">Наш центр находится в [Укажите Район/Станцию метро] Москвы. Легко добраться и комфортно заниматься.</p>
+            </div>
+        </div>
+    </div>
+     <!-- Декоративные элементы -->
+     <div class="decorative-shape triangle-4"></div>
+     <div class="decorative-shape triangle-5"></div>
+</section>
+{% endblock %}
+
+{% block scripts_extra %}
+<!-- Дополнительные скрипты для главной страницы, если нужны -->
+{% endblock %}

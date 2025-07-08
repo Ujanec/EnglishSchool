@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}О нас - Школа Английского{% endblock %}
+
+{% block head_extra %}
+{# Если нужны специфичные стили или скрипты для этой страницы #}
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+{% endblock %}
+
+{% block content %}
+
+<!-- ==== Секция Миссии ==== -->
+<section class="container text-center py-5 mission-section" data-aos="fade-up">
+    <h1 class="display-4 fw-bold mb-4">О Нашей Школе</h1>
+    <p class="lead col-lg-8 mx-auto mission-text">
+        Наша миссия — помочь вам <span class="highlight-text">свободно общаться</span> на английском и открыть новые горизонты в карьере и жизни. Мы верим, что изучение языка должно быть <span class="highlight-text">увлекательным и эффективным</span> процессом, доступным каждому.
+    </p>
+</section>
+
+
+
+<!-- ==== Секция Статистики ==== -->
+<section class="container py-5 stats-section" data-aos="fade-up">
+    <h2 class="text-center mb-5 section-heading">Наша Школа в Цифрах</h2>
+    <div class="row text-center g-4">
+        <div class="col-md-4 stat-item" data-aos="zoom-in" data-aos-delay="100">
+            <div class="stat-card p-4 rounded shadow-sm h-100">
+                <div class="stat-number display-4 fw-bold mb-2">20</div>
+                <div class="stat-label text-muted">Лет опыта преподавания</div>
+            </div>
+        </div>
+        <div class="col-md-4 stat-item" data-aos="zoom-in" data-aos-delay="200">
+             <div class="stat-card p-4 rounded shadow-sm h-100">
+                <div class="stat-number display-4 fw-bold mb-2">17</div>
+                <div class="stat-label text-muted">Квалифицированных преподавателей</div>
+             </div>
+        </div>
+        <div class="col-md-4 stat-item" data-aos="zoom-in" data-aos-delay="300">
+            <div class="stat-card p-4 rounded shadow-sm h-100">
+                <div class="stat-number display-4 fw-bold mb-2">500+</div>
+                <div class="stat-label text-muted">Довольных студентов</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- ==== Секция "Как мы учим?" ==== -->
+<section class="container py-5 approach-section" id="approach" data-aos="fade-up">
+    <h2 class="text-center mb-5 section-heading">Как Устроен Процесс Обучения?</h2>
+    <div class="row g-4">
+        <div class="col-lg-6 approach-item" data-aos="fade-right">
+            <div class="d-flex align-items-start">
+                <div class="approach-icon fs-2 me-3 text-primary"><i class="bi bi-person-video3"></i></div>
+                <div>
+                    <h4 class="approach-title">Гибкие Форматы</h4>
+                    <p class="approach-text">Занимайтесь онлайн или офлайн в нашем уютном центре в Москве. Выбирайте индивидуальные уроки или динамичные мини-группы.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 approach-item" data-aos="fade-left">
+             <div class="d-flex align-items-start">
+                <div class="approach-icon fs-2 me-3 text-primary"><i class="bi bi-chat-right-text-fill"></i></div>
+                <div>
+                    <h4 class="approach-title">Коммуникативная Методика</h4>
+                    <p class="approach-text">Фокус на разговорной практике с первого занятия. Используем современные материалы и интерактивные задания, чтобы вы заговорили быстрее.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 approach-item" data-aos="fade-right" data-aos-delay="100">
+             <div class="d-flex align-items-start">
+                <div class="approach-icon fs-2 me-3 text-primary"><i class="bi bi-people-fill"></i></div>
+                <div>
+                    <h4 class="approach-title">Опытные Преподаватели</h4>
+                    <p class="approach-text">Наши учителя – не только профессионалы с международными сертификатами  CELTA, TESOL, IELTS и GRE, но и люди, увлеченные своим делом.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 approach-item" data-aos="fade-left" data-aos-delay="100">
+             <div class="d-flex align-items-start">
+                <div class="approach-icon fs-2 me-3 text-primary"><i class="bi bi-check-circle-fill"></i></div>
+                <div>
+                    <h4 class="approach-title">Поддержка и Мотивация</h4>
+                    <p class="approach-text">Мы создаем дружелюбную атмосферу, помогаем отслеживать прогресс и поддерживаем мотивацию на всем пути обучения.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="my-5">
+
+<!-- ==== Секция Географии (Пример) ==== -->
+<section class="container py-5 location-section" data-aos="fade-up">
+     <h2 class="text-center mb-5 section-heading">Где Нас Найти?</h2>
+     <div class="row">
+         <div class="col-md-6 mb-4 mb-md-0">
+             <h4><i class="bi bi-geo-alt-fill text-primary me-2"></i>Наш Учебный Центр в Москве</h4>
+             <p>Мы находимся по адресу: г.Москва, Бачурнская улица 11Ак1 </p>
+             <p>Приходите на очные занятия в комфортной обстановке!</p>
+             {# Сюда можно вставить карту Google/Yandex #}
+             {# <div id="map" style="height: 300px; background: var(--bg-accent-color);">Карта будет здесь</div> #}
+         </div>
+         <div class="col-md-6">
+             <h4><i class="bi bi-globe text-primary me-2"></i>Онлайн Обучение</h4>
+             <p>Благодаря онлайн-формату, наши студенты учатся с нами из разных уголков России и мира!</p>
+             <ul class="list-unstyled">
+                 <li><i class="bi bi-check text-success me-2"></i>Удобная платформа Zoom, MTS-link, Вебинар, WhatsApp</li>
+                 <li><i class="bi bi-check text-success me-2"></i>Интерактивные материалы</li>
+                 <li><i class="bi bi-check text-success me-2"></i>Гибкий график</li>
+             </ul>
+             <p>Присоединяйтесь к нашим онлайн-группам или индивидуальным занятиям из любой точки!</p>
+         </div>
+     </div>
+</section>
+
+<hr class="my-5">
+
+<!-- ==== Секция Призыва к Действию ==== -->
+<section class="container text-center py-5 cta-section" data-aos="zoom-in">
+    <h2 class="mb-4">Готовы Начать?</h2>
+    <p class="lead mb-4">Узнайте больше о наших программах или запишитесь на бесплатный пробный урок!</p>
+    <a href="{{ url_for('pricing') }}" class="btn btn-primary btn-lg me-2 mb-2">Смотреть Цены</a>
+    <a href="#" class="btn btn-outline-secondary btn-lg mb-2" data-bs-toggle="modal" data-bs-target="#callbackModal">Пробный Урок</a>
+</section>
+
+
+{% endblock %}
+
+{% block scripts_extra %}
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    // Инициализация AOS, если она не глобальная в base.html или script.js
+    // AOS.init({ duration: 1000, once: true });
+</script>
+{# Скрипты для карты, если будете добавлять #}
+{% endblock %}

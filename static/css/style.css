@@ -1,0 +1,1193 @@
+/* static/css/style.css */
+
+/* === Цветовые переменные === */
+:root {
+  /* Темная тема (по умолчанию) */
+  --bg-color: #121212;
+  --bg-secondary-color: #1e1e1e;
+  --bg-accent-color: #2a2a2e;
+  --text-color: #e0e0e0;
+  --text-muted-color: #a0a0a0;
+  --heading-color: #ffffff; /* Белый для заголовков в темной теме */
+  --primary-color: #bb86fc; /* Фиолетовый акцент */
+  --primary-variant-color: #9e6bdb;
+  --secondary-color: #03dac6; /* Бирюзовый акцент */
+  --secondary-variant-color: #01bfa5;
+  --border-color: #333333;
+  --link-color: var(--primary-color);
+  --link-hover-color: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --icon-bg-color: rgba(255, 255, 255, 0.1);
+  --icon-color: var(--secondary-color);
+  --hr-color: rgba(255, 255, 255, 0.1);
+
+  --decorative-triangle-1: rgba(187, 134, 252, 0.08);
+  --decorative-triangle-2: rgba(3, 218, 198, 0.06);
+  --decorative-triangle-3: rgba(187, 134, 252, 0.05);
+  --decorative-triangle-4: rgba(3, 218, 198, 0.04);
+  --decorative-triangle-5: rgba(255, 255, 255, 0.05);
+  --decorative-triangle-6: rgba(187, 134, 252, 0.07);
+  --decorative-triangle-7: rgba(3, 218, 198, 0.05);
+}
+
+body.light-mode {
+  /* Светлая тема */
+  --bg-color: #f8f9fa;
+  --bg-secondary-color: #ffffff;
+  --bg-accent-color: #e9ecef;
+  --text-color: #212529;
+  --text-muted-color: #6c757d;
+  --heading-color: #343a40; /* Темно-серый для заголовков в светлой теме */
+  --primary-color: #0d6efd;
+  --primary-variant-color: #0b5ed7;
+  --secondary-color: #198754;
+  --secondary-variant-color: #157347;
+  --border-color: #dee2e6;
+  --link-color: #0d6efd;
+  --link-hover-color: #0a58ca;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --icon-bg-color: rgba(13, 110, 253, 0.08);
+  --icon-color: var(--primary-color);
+  --hr-color: rgba(0, 0, 0, 0.1);
+
+  --decorative-triangle-1: rgba(13, 110, 253, 0.1);
+  --decorative-triangle-2: rgba(40, 167, 69, 0.08);
+  --decorative-triangle-3: rgba(255, 193, 7, 0.08);
+  --decorative-triangle-4: rgba(13, 110, 253, 0.06);
+  --decorative-triangle-5: rgba(108, 117, 125, 0.06);
+  --decorative-triangle-6: rgba(11, 94, 215, 0.09);
+  --decorative-triangle-7: rgba(255, 193, 7, 0.1);
+}
+
+/* === Плавные переходы === */
+body, .navbar, .card, .founder-section, .why-us-section, .benefit-item, .btn, footer, .icon-square, #theme-toggle-button, .founder-photo-container {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.decorative-shape {
+    transition: border-color 0.3s ease;
+}
+.navbar-toggler-icon {
+    transition: filter 0.3s ease;
+}
+.btn, .benefit-icon i {
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* === Общие стили === */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.7;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding-bottom: 320px;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand, .main-heading, .feature-title, .pricing-title, .price-card-title, .founder-name, .why-us-heading, .benefit-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--heading-color); /* Цвет заголовков по умолчанию */
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+/* === Шапка (Navbar) === */
+.navbar {
+    background-color: var(--bg-secondary-color) !important;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    border-bottom: 1px solid var(--border-color);
+}
+.navbar-brand {
+    color: var(--heading-color) !important;
+}
+.nav-link {
+     color: var(--text-muted-color) !important;
+     transition: color 0.2s ease;
+}
+.nav-link.active, .nav-link:hover {
+     color: var(--heading-color) !important;
+}
+.navbar-toggler {
+    border-color: var(--border-color);
+}
+.navbar-toggler-icon {
+    filter: invert(0.8) grayscale(100%) brightness(1.5);
+}
+body.light-mode .navbar-toggler-icon {
+    filter: none;
+}
+
+/* === Кнопки (Buttons) === */
+.btn {
+    padding: 10px 25px;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    text-decoration: none !important;
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 10px var(--shadow-color);
+}
+.btn-primary:hover {
+    background-color: var(--primary-variant-color);
+    border-color: var(--primary-variant-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--shadow-color);
+}
+.btn-outline-secondary {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+.btn-outline-secondary:hover {
+     background-color: var(--secondary-variant-color);
+     color: var(--bg-secondary-color);
+     border-color: var(--secondary-variant-color);
+     transform: translateY(-2px);
+}
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-secondary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* === Горизонтальный разделитель (HR) === */
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--hr-color), transparent);
+    margin: 4rem 0;
+}
+.visually-hidden {
+    display: none !important;
+}
+
+/* === Главная секция (Hero Section) === */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 4rem;
+}
+.logo-image {
+    margin-bottom: 1.5rem !important;
+    width: 80px;
+    height: auto;
+}
+.main-heading {
+    color: var(--heading-color) !important; /* Используем цвет заголовков + !important */
+    margin-bottom: 1rem;
+}
+.promo-text {
+    color: var(--text-muted-color);
+    font-size: 1.1rem;
+}
+
+/* === Секция основателя (Founder Section) === */
+.founder-section {
+    background-color: var(--bg-secondary-color);
+    border-radius: 15px;
+    padding: 3rem 2rem;
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 5px 25px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+/* Стили для контейнера фотографии */
+.founder-photo-container {
+    display: block; /* Блочный элемент для центрирования через margin */
+    width: 200px;
+    max-width: 100%;
+    aspect-ratio: 4 / 5; /* Пропорции прямоугольника */
+    overflow: hidden;
+    border: 3px solid var(--bg-accent-color);
+    border-radius: 12px; /* Скругление углов контейнера */
+    box-shadow: 0 6px 18px var(--shadow-color);
+    margin-bottom: 1.5rem;
+    margin-left: auto; /* Центрируем контейнер в колонке */
+    margin-right: auto; /* Центрируем контейнер в колонке */
+}
+/* Стили для самого изображения внутри контейнера */
+.founder-photo-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Заполняет контейнер, обрезая лишнее */
+}
+.founder-name {
+    color: var(--heading-color);
+}
+.founder-bio {
+    color: var(--text-color);
+    line-height: 1.8;
+}
+
+/* === Секция преимуществ (Features Section) === */
+.features-section {
+     position: relative;
+     overflow: hidden;
+     padding-top: 2rem;
+     padding-bottom: 2rem;
+}
+.feature-title {
+    color: var(--heading-color) !important; /* Используем цвет заголовков + !important */
+    margin-bottom: 0.5rem;
+}
+.feature-text {
+    color: var(--text-muted-color);
+}
+body:not(.light-mode) .features-section .feature-text {
+  color: #f5f5f5 !important; /* Светлый текст для темной темы */
+}
+.icon-square {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: .75rem;
+    background-color: var(--icon-bg-color) !important;
+    color: var(--icon-color) !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+.icon-square i {
+    line-height: 1;
+}
+
+/* === Стили для страницы "О нас" === */
+
+.section-heading { /* Общий стиль для заголовков секций */
+    color: var(--primary-color);
+    margin-bottom: 3rem !important;
+    font-weight: 700;
+}
+
+/* Секция Миссии */
+.mission-section h1 {
+    color: var(--heading-color); /* Стандартный цвет заголовка */
+}
+.mission-text {
+    font-size: 1.15rem;
+    color: var(--text-muted-color);
+}
+.mission-text .highlight-text { /* Используем тот же стиль, что и на главной */
+    color: var(--secondary-color);
+    font-weight: bold;
+    border-bottom: 2px dotted var(--secondary-color);
+}
+
+/* Секция Статистики */
+.stats-section .stat-card {
+    background-color: var(--bg-secondary-color);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.stat-number {
+    color: var(--primary-color);
+    line-height: 1.1;
+}
+.stat-label {
+    color: var(--text-muted-color); /* Базовый цвет для светлой темы */
+    font-size: 0.95rem;
+    transition: color 0.3s ease; /* Добавим плавный переход цвета */
+}
+
+body:not(.light-mode) .stats-section .stat-label {
+    color: var(--heading-color) !important; /* <--- ДОБАВЛЕНО !important */
+}
+
+/* Секция "Как мы учим?" */
+.approach-section .approach-item {
+    margin-bottom: 2rem; /* Отступ между элементами */
+}
+.approach-icon i {
+    line-height: 1; /* Выравнивание иконки */
+}
+.approach-title {
+    color: var(--heading-color);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+.approach-text {
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Секция Команды */
+.team-section .founder-card {
+    background-color: var(--bg-color); /* Немного другой фон, чем у секции */
+    border: 1px solid var(--border-color);
+}
+.founder-role {
+    font-style: italic;
+}
+.founder-bio-short {
+    font-size: 0.95rem;
+    color: var(--text-muted-color);
+}
+/* Стили для контейнера фото уже есть общие */
+
+/* Секция Географии */
+.location-section h4 {
+    color: var(--heading-color);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+.location-section h4 i {
+    font-size: 1.5rem; /* Размер иконки геолокации/глобуса */
+}
+.location-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+/* Секция Призыва к Действию */
+.cta-section h2 {
+     color: var(--heading-color);
+}
+.cta-section .lead {
+     color: var(--text-muted-color);
+}
+
+
+
+/* === Секция "Почему мы?" (Why Us Section) === */
+.why-us-section {
+    background-color: var(--bg-secondary-color);
+    padding: 4rem 1rem;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 3rem;
+    border: 1px solid var(--border-color);
+}
+.why-us-heading {
+    color: var(--primary-color); /* Этот заголовок остается акцентным */
+}
+.highlight-text {
+    color: var(--secondary-color);
+    font-weight: bold;
+    border-bottom: 2px dotted var(--secondary-color);
+}
+.benefit-item {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+.benefit-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px var(--shadow-color);
+}
+.benefit-icon {
+     color: var(--primary-color);
+     transition: transform 0.3s ease;
+}
+.benefit-item:hover .benefit-icon {
+    transform: scale(1.1);
+}
+.benefit-title {
+    color: var(--heading-color);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+.benefit-text {
+    color: var(--text-muted-color);
+    font-size: 0.95rem;
+}
+
+/* === Декоративные Фигуры (Треугольники) === */
+.decorative-shape {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.6;
+    pointer-events: none;
+}
+.triangle-1 { width: 0; height: 0; border-left: 15vw solid transparent; border-right: 15vw solid transparent; border-bottom: 10vw solid var(--decorative-triangle-1); bottom: -20px; left: 10%; transform: rotate(-15deg); }
+.triangle-2 { width: 0; height: 0; border-top: 8vw solid transparent; border-bottom: 8vw solid transparent; border-left: 12vw solid var(--decorative-triangle-2); top: 10%; right: -5%; transform: rotate(25deg); }
+.triangle-3 { width: 0; height: 0; border-left: 10vw solid transparent; border-right: 10vw solid transparent; border-top: 15vw solid var(--decorative-triangle-3); bottom: 5%; left: -5%; transform: rotate(5deg); }
+.triangle-4 { width: 0; height: 0; border-top: 12vw solid transparent; border-bottom: 12vw solid transparent; border-right: 18vw solid var(--decorative-triangle-4); top: 5%; left: -8%; transform: rotate(-30deg); }
+.triangle-5 { width: 0; height: 0; border-left: 15vw solid transparent; border-right: 15vw solid transparent; border-bottom: 10vw solid var(--decorative-triangle-5); bottom: -10%; right: 5%; transform: rotate(10deg); }
+.triangle-6 { width: 0; height: 0; border-left: 12vw solid transparent; border-right: 12vw solid transparent; border-top: 8vw solid var(--decorative-triangle-6); bottom: 5%; left: 15%; transform: rotate(10deg); opacity: 0.7; }
+.triangle-7 { width: 0; height: 0; border-top: 10vw solid transparent; border-bottom: 10vw solid transparent; border-left: 15vw solid var(--decorative-triangle-7); top: 50%; right: -6%; transform: translateY(-50%) rotate(-15deg); opacity: 0.6; }
+
+/* === Подвал (Footer) === */
+footer {
+    padding: 2rem 0;
+    background-color: var(--bg-secondary-color);
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted-color);
+}
+
+/* === Кнопка переключения темы === */
+#theme-toggle-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: var(--bg-secondary-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+#theme-toggle-button:hover {
+    transform: scale(1.1);
+    background-color: var(--bg-accent-color);
+}
+#theme-toggle-button .bi-sun-fill { display: none; }
+body.light-mode #theme-toggle-button .bi-moon-fill { display: none; }
+body.light-mode #theme-toggle-button .bi-sun-fill { display: inline-block; }
+
+
+.cat-animation-layer {
+    position: fixed; /* Фиксируем относительно окна браузера */
+    bottom: 0;       /* Прижимаем к низу */
+    left: 0;
+    width: 100%;
+    height: 300px; /* Примерная высота для анимации (можно настроить) */
+    overflow: hidden; /* Скрываем все, что выходит за пределы */
+    z-index: -1;      /* Помещаем ПОД основной контент, но НАД фоновыми треугольниками */
+                      /* Возможно, придется поиграть со значением z-index */
+    pointer-events: none; /* Чтобы слой не мешал кликать по элементам под ним */
+}
+
+#animated-buildings {
+    background: url('https://res.cloudinary.com/pastelitos/image/upload/v1610526533/eva/edificiosOne_fsg7nx.svg');
+    height: 100%; /* Занимает всю высоту слоя анимации */
+    width: 100%;  /* Занимает всю ширину слоя анимации */
+    background-position: 0px bottom; /* Начинаем с низа */
+    background-repeat: repeat-x; /* Повторяем по горизонтали */
+    animation: animar_edificios 120s linear infinite;
+    position: absolute; /* Позиционируем внутри .cat-animation-layer */
+    bottom: 0;
+    left: 0;
+    opacity: 0.3; /* Делаем здания полупрозрачными, чтобы не перекрывали фон сильно */
+    /* Можно добавить фильтр для соответствия теме */
+    filter: brightness(0.6) contrast(1.2);
+}
+body.light-mode #animated-buildings {
+    opacity: 0.15;
+    filter: brightness(1.1) contrast(0.9);
+}
+
+/* Анимация зданий (из вашего примера) */
+@keyframes animar_edificios {
+    from { background-position: 0 bottom; }
+    to { background-position: -200% bottom; } /* Увеличил значение для возможной большей скорости */
+}
+@-webkit-keyframes animar_edificios {
+    from { background-position: 0 bottom; }
+    to { background-position: -200% bottom; }
+}
+@-moz-keyframes animar_edificios {
+    from { background-position: 0 bottom; }
+    to { background-position: -200% bottom; }
+}
+@-ms-keyframes animar_edificios {
+    from { background-position: 0 bottom; }
+    to { background-position: -200% bottom; }
+}
+
+
+#animated-cat {
+    background: url('https://res.cloudinary.com/pastelitos/image/upload/v1610526571/eva/gatito_pushui.svg');
+    height: 150px;
+    width: 255px;
+    background-size: auto 150px;
+    position: absolute;
+    bottom: 10px;
+    /* left: 50px; */ /* Убираем фиксированную позицию слева */
+    left: 0; /* Ставим 0, т.к. начальное смещение будет через transform */
+    z-index: 1;
+    filter: grayscale(30%) brightness(0.9);
+    opacity: 0; /* Начинаем невидимым, пока анимация не начнется */
+
+    /* === ИЗМЕНЕНИЯ ЗДЕСЬ: Применяем ОБЕ анимации === */
+    animation:
+        /* Анимация спрайта (бег на месте) */
+        sprite-cat-animation 2s steps(16, end) infinite,
+        /* Анимация движения по горизонтали */
+        move-cat-across 60s linear infinite; /* Время движения (25 сек) - можно настроить */
+    /* === КОНЕЦ ИЗМЕНЕНИЙ === */
+}
+body.light-mode #animated-cat {
+    filter: grayscale(0%) brightness(1);
+}
+
+
+/* === Стили для сообщений об ошибках валидации формы === */
+.form-control.is-invalid,
+.form-select.is-invalid,
+.form-check-input.is-invalid + .form-check-label { /* Подсвечиваем и рамку поля, и текст лейбла для чекбокса */
+    /* Стиль для рамки уже есть в Bootstrap, но можем усилить/переопределить */
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: #dc3545; /* Стандартный цвет ошибки Bootstrap */
+}
+.form-check-input.is-invalid {
+    border-color: #dc3545;
+}
+
+
+.form-error-message {
+    display: none; /* Скрыто по умолчанию */
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: .875em; /* Размер шрифта как у Bootstrap .invalid-feedback */
+    color: #dc3545;   /* Красный цвет для текста ошибки */
+}
+
+/* Чтобы ошибка для чекбокса была под ним */
+.form-check .form-error-message {
+    /* display: block; */ /* будет управляться JS */
+    margin-left: 0; /* Если нужно сбросить отступ */
+}
+
+
+/* Анимация спрайта кота (остается без изменений) */
+@-webkit-keyframes sprite-cat-animation { from { background-position: 0 0; } to { background-position: -4080px 0; } }
+@-ms-keyframes sprite-cat-animation { from { background-position: 0 0; } to { background-position: -4080px 0; } }
+@-moz-keyframes sprite-cat-animation { from { background-position: 0 0; } to { background-position: -4080px 0; } }
+@keyframes sprite-cat-animation { from { background-position: 0 0; } to { background-position: -4080px 0; } }
+
+/* Адаптивность для кота (нужно обновить animation) */
+@media (max-width: 768px) {
+    #animated-cat {
+        height: 100px;
+        width: 170px;
+        background-size: auto 100px;
+        bottom: 5px;
+        left: 0; /* Также ставим 0 */
+         /* Применяем обе анимации с возможно другой скоростью движения */
+         animation:
+            sprite-cat-animation-mobile 0.8s steps(16, end) infinite,
+            move-cat-across 20s linear infinite; /* Например, чуть быстрее на мобильных */
+    }
+    /* Пересчитываем background-position для мобильной анимации спрайта */
+    @-webkit-keyframes sprite-cat-animation-mobile { from { background-position: 0 0; } to { background-position: -2720px 0; } }
+    @-ms-keyframes sprite-cat-animation-mobile { from { background-position: 0 0; } to { background-position: -2720px 0; } }
+    @-moz-keyframes sprite-cat-animation-mobile { from { background-position: 0 0; } to { background-position: -2720px 0; } }
+    @keyframes sprite-cat-animation-mobile { from { background-position: 0 0; } to { background-position: -2720px 0; } }
+
+    .cat-animation-layer {
+        height: 200px;
+    }
+}
+
+/* Добавляем эту новую анимацию */
+@keyframes move-cat-across {
+  0% {
+    transform: translateX(-100%); /* Начинаем полностью за левым краем */
+    opacity: 1;
+  }
+  95% {
+     transform: translateX(100vw); /* Двигаемся до правого края экрана */
+     opacity: 1; /* Остаемся видимыми почти до конца */
+  }
+  100% {
+     transform: translateX(100vw); /* Завершаем за правым краем */
+     opacity: 0; /* Делаем невидимым перед мгновенным возвратом в начало */
+  }
+}
+/* Префиксы для совместимости */
+@-webkit-keyframes move-cat-across { 0% { transform: translateX(-100%); opacity: 1; } 95% { transform: translateX(100vw); opacity: 1; } 100% { transform: translateX(100vw); opacity: 0; } }
+@-moz-keyframes move-cat-across { 0% { transform: translateX(-100%); opacity: 1; } 95% { transform: translateX(100vw); opacity: 1; } 100% { transform: translateX(100vw); opacity: 0; } }
+@-ms-keyframes move-cat-across { 0% { transform: translateX(-100%); opacity: 1; } 95% { transform: translateX(100vw); opacity: 1; } 100% { transform: translateX(100vw); opacity: 0; } }
+
+/* === Стили для закрепленной шапки === */
+.sticky-top-header { /* Или просто 'header' если не добавляли класс */
+    position: sticky; /* Делаем элемент "липким" */
+    top: 0;           /* Прилипает к самому верху */
+    width: 100%;      /* Растягиваем на всю ширину */
+    z-index: 1030;    /* Устанавливаем высокий z-index, чтобы шапка была поверх другого контента */
+                      /* (1030 - стандартное значение для навбаров в Bootstrap) */
+    /* Добавим небольшой фон и тень, чтобы было видно границу при прокрутке */
+    /* Эти стили уже могут быть у вас для .navbar, но продублируем для header */
+    background-color: var(--bg-secondary-color);
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+/* Добавим небольшой отступ сверху для основного контента, */
+/* чтобы он не заезжал под шапку при начальной загрузке (если шапка не position:fixed) */
+/* Это может не понадобиться с position:sticky, но оставим для примера */
+/*
+main[role="main"] {
+    padding-top: 1rem;
+}
+*/
+
+/* ... (Остальные стили: Шапка, Кнопки, Hero, Founder и т.д.) ... */
+
+
+/* === Конец стилей для Анимации Кота === */
+
+
+/* === Стили для Модального Окна Обратного Звонка === */
+
+.modal-content {
+    background-color: var(--bg-secondary-color); /* Фон модалки */
+    color: var(--text-color); /* Цвет текста */
+    border: 1px solid var(--border-color);
+    border-radius: 15px; /* Скруглим углы */
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header .modal-title {
+     color: var(--heading-color);
+}
+
+/* Стили для полей формы */
+.modal-body .form-control,
+.modal-body .form-select {
+    background-color: var(--bg-color); /* Фон поля ввода */
+    color: var(--text-color); /* Цвет текста в поле */
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1rem; /* Увеличим немного поля */
+}
+.modal-body .form-control::placeholder { /* Стиль плейсхолдера */
+    color: var(--text-muted-color);
+    opacity: 0.7;
+}
+/* Убираем стандартное свечение при фокусе */
+.modal-body .form-control:focus,
+.modal-body .form-select:focus {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-color: var(--primary-color); /* Подсветка рамки акцентным цветом */
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25); /* Используем Bootstrap переменную для цвета тени фокуса */
+    /* Если переменная --bs-primary-rgb не работает, задайте цвет вручную: */
+    /* box-shadow: 0 0 0 0.25rem rgba(187, 134, 252, 0.25); */ /* Для темной темы */
+}
+body.light-mode .modal-body .form-control:focus,
+body.light-mode .modal-body .form-select:focus {
+     /* box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); */ /* Для светлой темы */
+}
+
+
+/* Стили для Select (стрелка) */
+.modal-body .form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23a0a0a0' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"); /* Серая стрелка */
+}
+body:not(.light-mode) .modal-body .form-select {
+     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23e0e0e0' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"); /* Светлая стрелка для темной темы */
+}
+
+
+/* Стили для чекбокса */
+.modal-body .form-check-input {
+    background-color: var(--bg-color);
+    border-color: var(--border-color);
+}
+.modal-body .form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.modal-body .form-check-label a {
+    color: var(--link-color);
+    text-decoration: underline;
+}
+.modal-body .form-check-label a:hover {
+    color: var(--link-hover-color);
+}
+
+/* Стили для кнопки отправки */
+.modal-body .callback-submit-btn {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 1.1rem;
+    /* Цвета кнопки уже заданы через .btn-primary */
+}
+
+/* Стили для сообщения об успехе */
+#callback-success-message {
+    /* display: none; уже задан инлайново */
+    opacity: 0; /* Начальная прозрачность для анимации */
+    transform: translateY(20px); /* Начальное смещение для анимации */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+#callback-success-message.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+#callback-success-message .success-icon {
+    color: var(--secondary-color); /* Цвет галочки */
+}
+#callback-success-message h4 {
+    color: var(--heading-color);
+}
+
+/* Стили для модалки политики */
+#privacyPolicyModal .modal-content {
+    background-color: var(--bg-secondary-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+#privacyPolicyModal .modal-header {
+    border-bottom: 1px solid var(--border-color);
+}
+#privacyPolicyModal .modal-title {
+     color: var(--heading-color);
+}
+#privacyPolicyModal .modal-footer {
+    border-top: 1px solid var(--border-color);
+}
+
+body:not(.light-mode) #callbackModal .modal-body #callback-form > p.text-muted.small {
+    color: #f8f8f8 !important;
+}
+
+/* === Стилизация intl-tel-input === */
+
+/* Контейнер библиотеки */
+.iti {
+    width: 100%; /* Занимает всю ширину родителя (колонки формы) */
+}
+
+/* Стилизация основного поля ввода, когда библиотека активна */
+.iti input#callback-phone {
+    /* Наследуем стили от других полей формы */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem; /* Стандартный радиус Bootstrap */
+    padding-left: 100px !important; /* !!! Добавляем отступ слева, чтобы текст не залезал под флаг */
+                                  /* Подберите значение под размер флага */
+    height: calc(1.5em + 1.5rem + 2px); /* Высота как у других полей Bootstrap */
+}
+.iti input#callback-phone:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Контейнер с флагом и стрелкой */
+.iti__flag-container {
+    /* Можно настроить отступы, если нужно */
+}
+
+/* Выбранный флаг */
+.iti__selected-flag {
+    padding: 0 10px 0 12px; /* Отступы внутри контейнера флага */
+    background-color: var(--bg-accent-color); /* Фон для области флага */
+    border-right: 1px solid var(--border-color);
+    border-radius: 0.375rem 0 0 0.375rem; /* Скругляем левые углы */
+}
+.iti__selected-flag:hover {
+    background-color: var(--bg-color);
+}
+
+/* Стрелка выпадающего списка */
+.iti__arrow {
+    border-top-color: var(--text-muted-color); /* Цвет стрелки */
+}
+.iti__arrow--up {
+    border-bottom-color: var(--text-muted-color);
+}
+
+/* Выпадающий список стран */
+.iti__country-list {
+    background-color: var(--bg-secondary-color); /* Фон списка */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 10px var(--shadow-color);
+    color: var(--text-color); /* Цвет текста в списке */
+    border-radius: 5px;
+}
+
+/* Элемент списка стран */
+.iti__country {
+    padding: 8px 12px;
+}
+
+/* Элемент списка при наведении */
+.iti__country:hover,
+.iti__active { /* Активный/выбранный элемент */
+    background-color: var(--bg-accent-color);
+}
+
+/* Разделитель в списке */
+.iti__divider {
+    border-bottom-color: var(--border-color);
+}
+
+/* Название страны */
+.iti__country-name {
+    color: var(--text-color);
+}
+
+/* Код страны */
+.iti__dial-code {
+    color: var(--text-muted-color);
+}
+
+/* Стилизация скроллбара внутри выпадающего списка (WebKit) */
+.iti__country-list::-webkit-scrollbar {
+    width: 6px;
+}
+.iti__country-list::-webkit-scrollbar-track {
+    background-color: var(--bg-secondary-color);
+}
+.iti__country-list::-webkit-scrollbar-thumb {
+    background-color: var(--text-muted-color);
+    border-radius: 6px;
+}
+.iti__country-list::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-color);
+}
+/* Стилизация скроллбара внутри выпадающего списка (Firefox) */
+.iti__country-list {
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-muted-color) var(--bg-secondary-color);
+}
+
+/* === Стили для Модального Окна Политики Конфиденциальности === */
+
+#privacyPolicyModal .modal-content {
+    /* Стили фона, рамки и т.д. уже заданы общими стилями .modal-content */
+}
+#privacyPolicyModal .modal-header {
+    /* Стили уже заданы */
+}
+#privacyPolicyModal .modal-title {
+     /* Стили уже заданы */
+}
+
+/* Стилизация текста политики, чтобы он выглядел как документ */
+#privacyPolicyModal .modal-body.privacy-policy-text {
+    background-color: var(--bg-color); /* Используем основной фон (чуть светлее/темнее вторичного) */
+    color: var(--text-color);
+    font-family: 'Times New Roman', Times, serif; /* Классический шрифт для документа */
+    font-size: 0.95rem; /* Чуть меньше стандартного */
+    line-height: 1.6;
+    padding: 2rem; /* Увеличим внутренние отступы */
+}
+/* Стили для темной темы (если нужно чуть осветлить фон документа) */
+body:not(.light-mode) #privacyPolicyModal .modal-body.privacy-policy-text {
+     background-color: #1f1f1f; /* Чуть светлее основного темного фона */
+     color: #cccccc; /* Чуть светлее основного текста темной темы */
+}
+
+
+#privacyPolicyModal .modal-body h5, /* Подзаголовки, если будете добавлять */
+#privacyPolicyModal .modal-body h6 {
+    font-family: 'Montserrat', sans-serif; /* Возвращаем стандартный шрифт для подзаголовков */
+    color: var(--heading-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#privacyPolicyModal .modal-body p {
+    margin-bottom: 1rem;
+    text-align: justify; /* Выравнивание по ширине для вида документа */
+}
+
+#privacyPolicyModal .modal-body ul,
+#privacyPolicyModal .modal-body ol {
+    margin-left: 1.5rem; /* Отступ для списков */
+    margin-bottom: 1rem;
+}
+#privacyPolicyModal .modal-body li {
+    margin-bottom: 0.5rem;
+}
+
+
+#privacyPolicyModal .modal-footer {
+    /* Стили уже заданы */
+}
+
+/* === Адаптивность (Media Queries) === */
+@media (max-width: 768px) {
+    body {
+         /* ===>>> ДОБАВЬТЕ ЭТО ПРАВИЛО ВНУТРИ @media <<<=== */
+        padding-bottom: 220px; /* Высота слоя анимации на мобильных (200px) + запас (20px) */
+    }
+    .decorative-shape {
+        opacity: 0.3;
+        border-left-width: max(15vw, 40px);
+        border-right-width: max(15vw, 40px);
+        border-top-width: max(10vw, 30px);
+        border-bottom-width: max(10vw, 30px);
+    }
+    .triangle-1 { left: 5%; }
+    .triangle-2 { right: -10%; }
+    .triangle-3 { left: -10%; }
+    .triangle-4 { left: -15%; }
+    .triangle-5 { right: 0; }
+    .triangle-6 { left: 8%; }
+    .triangle-7 { right: -12%; }
+
+    .founder-section {
+        margin-top: 0;
+        padding: 2rem 1rem;
+    }
+    /* Адаптивность для контейнера фото */
+    .founder-photo-container {
+        width: 160px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    /* Центрируем текст под фото на мобильных */
+    .founder-section .col-md-8 {
+        text-align: center;
+        margin-top: 1.5rem; /* Добавим отступ сверху для текста на мобильных */
+    }
+    /* Убираем верт. выравнивание по центру на мобильных, элементы идут друг под другом */
+     .founder-section .row {
+        align-items: flex-start; /* Убрали !important */
+    }
+
+    .why-us-section {
+         padding: 3rem 1rem;
+    }
+     #theme-toggle-button {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        bottom: 15px;
+        right: 15px;
+    }
+    .main-heading {
+        font-size: calc(1.375rem + 1.5vw);
+    }
+    .feature-title {
+         font-size: calc(1.3rem + .6vw);
+    }
+    .benefit-title {
+        font-size: 1.15rem;
+    }
+}
+/* Возвращаем выравнивание текста и верт. центрирование для больших экранов */
+@media (min-width: 769px) {
+    /* Возвращаем выравнивание текста по левому краю */
+    .founder-section .col-md-8 {
+        text-align: left;
+        margin-top: 0; /* Убираем верхний отступ */
+    }
+    /* Убедимся, что align-items-center работает. */
+    /* Это правило может быть излишним, если класс есть в HTML, но добавим для надежности */
+     .founder-section .row.align-items-center { /* Уточняем селектор */
+         align-items: center !important; /* Временно вернем !important для теста, если не сработает без него */
+    }
+}
+
+
+/* === Стили для страницы цен (Pricing Page) === */
+.price-card {
+    background-color: var(--bg-secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; /* Добавил переходы фона/рамки */
+    display: flex;
+    flex-direction: column;
+}
+.price-card .card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1.5rem;
+}
+.price-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+/* Заголовок карточки */
+.price-card .card-body .price-card-title {
+    color: var(--primary-color); /* Акцентный цвет */
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+/* Диапазон цен */
+.price-card .card-body .price-range {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--secondary-color); /* Вторичный акцентный цвет */
+    margin-bottom: 0.5rem;
+    order: 2;
+}
+
+/* Описание */
+.price-card .card-body p.price-card-description {
+    color: var(--text-color); /* Базовый цвет текста для СВЕТЛОЙ темы */
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    order: 1;
+    transition: color 0.3s ease;
+}
+/* Принудительно задаем ТЕМНО-СЕРЫЙ цвет описания для ТЕМНОЙ темы */
+body:not(.light-mode) .price-card .card-body p.price-card-description {
+    color: #B0B0B0 !important; /* Конкретный светло-серый, НЕ БЕЛЫЙ + !important */
+}
+
+
+/* Дисклеймер (маленький текст) */
+.price-card .card-body p.text-muted.small {
+    color: var(--text-muted-color); /* Базовый приглушенный цвет для СВЕТЛОЙ темы */
+    font-size: 0.8rem;
+    margin-top: auto;
+    margin-bottom: 0.5rem;
+    order: 3;
+    transition: color 0.3s ease;
+}
+/* Принудительно задаем ТЕМНО-СЕРЫЙ цвет дисклеймера для ТЕМНОЙ темы */
+body:not(.light-mode) .price-card .card-body p.text-muted.small {
+    color: #888888 !important; /* Конкретный серый, НЕ БЕЛЫЙ + !important */
+}
+
+
+/* Кнопка */
+.price-card .card-body .mt-auto { /* Контейнер кнопки */
+     order: 4;
+     margin-top: 1rem !important;
+}
+.price-card .card-body .price-card-button {
+     color: var(--primary-color);
+     border-color: var(--primary-color);
+     align-self: flex-start;
+}
+.price-card .card-body .price-card-button:hover {
+     background-color: var(--primary-color);
+     color: var(--bg-secondary-color);
+     border-color: var(--primary-color);
+}
+
+/* Блок с ценами */
+.price-block {
+    order: 2; /* Идет после описания */
+    margin-bottom: 1rem; /* Отступ снизу перед дисклеймером/кнопкой */
+}
+
+/* Текущая (акционная) цена */
+.price-block .current-price {
+    color: var(--secondary-color); /* Используем вторичный акцентный цвет */
+    margin-right: 0.25rem; /* Небольшой отступ от единицы измерения */
+}
+
+/* Единица измерения (руб./час) */
+.price-block .price-unit {
+    color: var(--text-muted-color);
+    font-size: 1rem; /* Размер как у обычного текста */
+}
+
+/* Старая (зачеркнутая) цена */
+.price-block .old-price {
+    font-size: 1rem;
+    color: var(--text-muted-color); /* Базовый цвет (для светлой темы) */
+    transition: color 0.3s ease; /* Плавный переход */
+}
+.price-block .old-price del {
+    /* Стили для самого зачеркивания */
+}
+body:not(.light-mode) .price-block .old-price {
+    color: #f8f8f8 !important;
+}
+
+
+/* Описание */
+.price-card .card-body p.price-card-description {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    order: 1; /* Идет перед ценой */
+    transition: color 0.3s ease;
+}
+body:not(.light-mode) .price-card .card-body p.price-card-description {
+    color: #B0B0B0 !important;
+}
+
+/* Дисклеймер (скрыт, но стили оставим на всякий случай) */
+.price-card .card-body p.text-muted.small {
+    color: var(--text-muted-color);
+    font-size: 0.8rem;
+    margin-top: auto;
+    margin-bottom: 0.5rem;
+    order: 3;
+    transition: color 0.3s ease;
+}
+body:not(.light-mode) .price-card .card-body p.text-muted.small {
+    color: #888888 !important;
+}
+
+/* Кнопка */
+.price-card .card-body .mt-auto { /* Контейнер кнопки */
+     order: 4;
+     margin-top: 1rem !important;
+}
+.price-card .card-body .price-card-button {
+     color: var(--primary-color);
+     border-color: var(--primary-color);
+     align-self: flex-start;
+     background-color: var(--primary-color); /* Делаем кнопку основной */
+     color: #ffffff; /* Белый текст на кнопке */
+}
+.price-card .card-body .price-card-button:hover {
+     background-color: var(--primary-variant-color);
+     border-color: var(--primary-variant-color);
+     color: #ffffff;
+}
+
+
+/* === Стили для страниц ошибок (Error Pages) === */
+.display-1 {
+    color: var(--text-muted-color);
+}
+
+/* === Custom Scrollbar Styling === */
+body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+body::-webkit-scrollbar-track {
+  background-color: var(--bg-secondary-color);
+  border-radius: 10px;
+  margin: 2px;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--text-muted-color);
+  border-radius: 10px;
+  border: 2px solid var(--bg-secondary-color);
+  transition: background-color 0.2s ease-in-out;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-color);
+}
+body::-webkit-scrollbar-corner {
+  background-color: var(--bg-color);
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted-color) var(--bg-secondary-color);
+}

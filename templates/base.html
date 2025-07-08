@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Школа Английского{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png">
+
+    <!-- Подключение красивых шрифтов (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Подключение библиотеки для анимаций (Animate.css) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- Подключение CSS фреймворка Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Подключение иконок Bootstrap Icons (нужны для кнопки темы и др.) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Подключение CSS для intl-tel-input -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Ваши кастомные стили -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    {# --- СКРИПТ ДЛЯ ПРИМЕНЕНИЯ ТЕМЫ ДО ЗАГРУЗКИ СТРАНИЦЫ --- #}
+    <script>
+        (function() {
+            try {
+                const theme = localStorage.getItem('theme');
+                if (theme === 'light') {
+                    // Применяем класс к body. Осознаем возможное мигание.
+                    document.body.classList.add('light-mode');
+                }
+            } catch (e) {
+                console.error("Error applying theme from localStorage", e);
+            }
+        })();
+    </script>
+    {# --- КОНЕЦ СКРИПТА ПРИМЕНЕНИЯ ТЕМЫ --- #}
+
+    {# Блок для дополнительных стилей или мета-тегов со страниц-наследников #}
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+    {# Добавляем класс sticky-top-header для закрепления #}
+    <header class="sticky-top-header animate__animated animate__fadeInDown">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                 <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
+                     <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" width="30" height="auto" class="d-inline-block align-text-top me-2">
+                     English School
+                 </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" aria-current="page" href="{{ url_for('index') }}">Главная</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="{{ url_for('about') }}">О нас</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'pricing' %}active{% endif %}" href="{{ url_for('pricing') }}">Цены</a>
+                        </li>
+                        <li class="nav-item">
+                            {# Ссылка для открытия модального окна #}
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#callbackModal">Заказать обратный звонок</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    {# Основной контент страницы будет вставлен здесь #}
+    <main role="main">
+        {% block content %}
+        <!-- Содержимое страницы будет здесь -->
+        {% endblock %}
+    </main>
+
+    <footer class="mt-5 text-center">
+        <div class="container">
+            <p>© {{ current_year }} Школа Английского Языка. Все права защищены.</p>
+        </div>
+    </footer>
+
+    {# === АНИМАЦИЯ КОТА (Начало) === #}
+    <div class="cat-animation-layer">
+        <div id="animated-buildings"></div>
+        <div id="animated-cat"></div>
+    </div>
+    {# === АНИМАЦИЯ КОТА (Конец) === #}
+
+    {# === МОДАЛЬНОЕ ОКНО ДЛЯ ОБРАТНОГО ЗВОНКА (Начало) === #}
+    <div class="modal fade" id="callbackModal" tabindex="-1" aria-labelledby="callbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="callbackModalLabel">Заказать обратный звонок</h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {# Контейнер для сообщения об успехе (изначально скрыт) #}
+                    <div id="callback-success-message" class="text-center p-4" style="display: none;">
+                         <i class="bi bi-check-circle-fill text-success display-3 mb-3 success-icon"></i>
+                         <h4>Спасибо!</h4>
+                         <p>В ближайшее время с вами свяжутся.</p>
+                    </div>
+
+                    {# Форма обратного звонка (изначально видима) #}
+                    <form id="callback-form">
+                        <p class="text-muted mb-4 small">Заполните форму, и наш менеджер свяжется с вами для консультации.</p>
+                        <div class="mb-3">
+                            <label for="callback-name" class="form-label visually-hidden">Имя</label>
+                            <input type="text" class="form-control" id="callback-name" name="name" placeholder="Ваше имя" required>
+                            <div class="form-error-message" id="callback-name-error"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="callback-email" class="form-label visually-hidden">Почта</label>
+                            <input type="email" class="form-control" id="callback-email" name="email" placeholder="Ваша почта (необязательно)">
+                            <div class="form-error-message" id="callback-email-error"></div>
+                        </div>
+                         <div class="mb-3">
+                             <label for="callback-lesson-type" class="form-label visually-hidden">Тип занятий</label>
+                             <select class="form-select" id="callback-lesson-type" name="lesson_type" required>
+                                <option selected disabled value="">Выберите тип занятий...</option>
+                                <option value="individual_online">Индивидуально</option>
+                                <option value="group_online">Групповое занятие</option>
+                                <option value="unsure">Еще не знаю / Нужна консультация</option>
+                             </select>
+                             <div class="form-error-message" id="callback-lesson-type-error"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="callback-phone" class="form-label visually-hidden">Телефон</label>
+                            <input type="tel" class="form-control" id="callback-phone" name="phone" placeholder="Ваш телефон" required maxlength="20">
+                            <div class="form-error-message" id="callback-phone-error"></div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="callback-consent" name="consent" required>
+                            <label class="form-check-label small" for="callback-consent">
+                                Даю согласие на <a href="#" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">обработку персональных данных</a>
+                            </label>
+                            <div class="form-error-message" id="callback-consent-error"></div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg callback-submit-btn">Записаться</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# === МОДАЛЬНОЕ ОКНО ДЛЯ ОБРАТНОГО ЗВОНКА (Конец) === #}
+
+    {# === Модальное окно для Политики конфиденциальности === #}
+    <div class="modal fade" id="privacyPolicyModal" tabindex="-1" aria-labelledby="privacyPolicyModalLabel" aria-hidden="true">
+      {# Увеличиваем размер модального окна и делаем его прокручиваемым #}
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="privacyPolicyModalLabel">Согласие на обработку персональных данных и получение рекламы</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          {# === ЗАМЕНЯЕМ СОДЕРЖИМОЕ ТЕЛА МОДАЛЬНОГО ОКНА === #}
+          <div class="modal-body privacy-policy-text"> {# Добавляем класс для стилизации #}
+            <p>Настоящим даю согласие на обработку моих персональных данных ИП: Шогик, ОГРН/ОГРНИП: [Ваш ОГРН/ОГРНИП], с адресом местонахождения: Бачуринская улица 11Ак1, а также подтверждаю, что предоставляю данное согласие в своих интересах либо в интересах представляемого на законных основаниях несовершеннолетнего лица.</p>
+            <p>Согласие распространяется на следующие категории данных, включая персональные данные:</p>
+            <ul>
+              <li>фамилия, имя, отчество;</li>
+              <li>номер телефона;</li>
+              <li>адрес электронной почты;</li>
+              <li>контактная информация в мессенджерах (если применимо).</li>
+            </ul>
+            <p>Согласие на обработку персональных данных предоставляется с целью:</p>
+            <ul>
+                <li>Обработки и ответа на мою заявку (обратный звонок, запись на курс).</li>
+                <li>Предоставления информации об услугах Организации.</li>
+                <li>Получения информационных и рекламных сообщений от Организации (если применимо и дано отдельное согласие).</li>
+            </ul>
+
+            <p>Я проинформирован(а) и выражаю согласие со следующими условиями обработки моих данных, включая персональные:</p>
+            <ol>
+              <li>Обработка персональных данных осуществляется с использованием средств автоматизации и/или без использования таких средств.</li>
+              <li>Распространение рекламы (если применимо) осуществляется по сетям электросвязи посредством телефонных звонков, СМС-рассылок, рассылок на адрес электронной почты, рассылок в мессенджерах.</li>
+              <li>Обработка персональных данных осуществляется такими способами, как сбор, запись, систематизация, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передача (предоставление, доступ) [Укажите, кому может передаваться, если применимо, например: только сотрудникам Организации / третьим лицам для обеспечения сервиса], обезличивание, блокирование, удаление, уничтожение персональных данных.</li>
+              <li>Обработка статистических данных (например, файлов cookies) осуществляется с помощью сервисов веб-аналитики, таких как Яндекс.Метрика, Google Analytics [Укажите ваши сервисы].</li>
+              <li>Обработка персональных данных несовершеннолетнего лица осуществляется только на основании согласия его законного представителя.</li>
+            </ol>
+            <p>Настоящее согласие действует со дня его предоставления до дня отзыва в письменной форме. Согласие может быть отозвано полностью или частично в любой момент по письменному запросу, направленному на электронную почту [Ваша электронная почта для запросов, например, info@yourdomain.ru] или по адресу местонахождения Организации.</p>
+            <p>Организация обязуется прекратить обработку персональных данных или обеспечить ее прекращение (если обработка осуществляется другим лицом, действующим по поручению Организации) и уничтожить персональные данные или обеспечить их уничтожение в срок, не превышающий тридцати дней с даты поступления указанного отзыва, за исключением случаев, когда Организация вправе осуществлять обработку персональных данных без согласия субъекта персональных данных на основаниях, предусмотренных Федеральным законом № 152-ФЗ «О персональных данных» или иными федеральными законами.</p>
+          </div>
+          {# === КОНЕЦ ЗАМЕНЫ === #}
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# --- КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ --- #}
+    <button id="theme-toggle-button" type="button" class="btn" aria-label="Переключить тему">
+        <i class="bi bi-moon-fill"></i> {# Иконка луны по умолчанию (для темной темы) #}
+        <i class="bi bi-sun-fill"></i>  {# Иконка солнца (скрыта CSS по умолчанию) #}
+    </button>
+    {# --- КОНЕЦ КНОПКИ ПЕРЕКЛЮЧЕНИЯ ТЕМЫ --- #}
+
+
+    <!-- Подключение JS -->
+    {# Bootstrap Bundle (включает Popper) #}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    {# Библиотека для анимаций при скролле (AOS) #}
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Инициализация AOS
+        try {
+            AOS.init({
+                duration: 1000, // длительность анимации
+                once: true // анимировать только один раз
+            });
+        } catch (e) {
+            console.error("AOS initialization failed", e);
+        }
+    </script>
+
+    {# Подключение JS для intl-tel-input #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/utils.js" referrerpolicy="no-referrer"></script>
+
+    {# Ваш кастомный JS файл (включая логику переключения темы и intl-tel-input) #}
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    {# Блок для дополнительных скриптов со страниц-наследников #}
+    {% block scripts_extra %}{% endblock %}
+</body>
+</html>
