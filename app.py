@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy  # <-- Импортируем SQLAlchemy
+from flask_migrate import Migrate      # <-- Импортируем Migrate
 import logging
 from logging.handlers import RotatingFileHandler
 import os
@@ -10,7 +11,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# --- Конфигурация Flask ---
 app = Flask(__name__)
 
 # --- Конфигурация SQLAlchemy ---
@@ -20,7 +20,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # --- Инициализация расширений ---
 db = SQLAlchemy(app)      # <-- Создаем объект БД
-#migrate = Migrate(app, db)  # <-- Создаем объект для миграций
+migrate = Migrate(app, db)  # <-- Создаем объект для миграций
 
 
 DATABASE = os.getenv('DATABASE_PATH', 'database.db') # 'database.db' - значение по умолчанию
