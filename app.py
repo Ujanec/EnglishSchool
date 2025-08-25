@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, jsonify
+from flask_sqlalchemy import SQLAlchemy  # <-- Импортируем SQLAlchemy
+from flask_migrate import Migrate      # <-- Импортируем Migrate
 import logging
 from logging.handlers import RotatingFileHandler
 import os
 from datetime import datetime
-import sqlite3 # <-- Импортируем sqlite3
-import re # <-- Импортируем re для валидации email (опционально)
+import re
 import requests
 from dotenv import load_dotenv
 
@@ -12,6 +13,16 @@ load_dotenv()
 
 # --- Конфигурация Flask ---
 app = Flask(__name__)
+
+# --- Конфигурация SQLAlchemy ---
+# Указываем Flask, где находится наша база данных
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(os.path.abspath(os.path.dirname(__file__)), 'database.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# --- Инициализация расширений ---
+db = SQLAlchemy(app)      # <-- Создаем объект БД
+migrate = Migrate(app, db)  # <-- Создаем объект для миграций
+
 
 DATABASE = os.getenv('DATABASE_PATH', 'database.db') # 'database.db' - значение по умолчанию
 BOT_TOKEN = os.getenv('BOT_TOKEN')
@@ -33,44 +44,22 @@ else:
         # raise ValueError(f"ADMIN_ID '{ADMIN_ID}' не является корректным числом!")
 
 
-def get_db():
-    # Используем DATABASE, который теперь из os.getenv
-    conn = sqlite3.connect(DATABASE)
-    conn.row_factory = sqlite3.Row
-    return conn
 
-# --- Функция для инициализации БД (создание таблицы) ---
-def init_db():
-    try:
-        conn = get_db()
-        cursor = conn.cursor()
-        print("Checking and updating callbacks table...")
-        # Добавляем столбец processed, если его нет
-        try:
-            cursor.execute("ALTER TABLE callbacks ADD COLUMN processed INTEGER DEFAULT 0")
-            print("Column 'processed' added to callbacks table.")
-        except sqlite3.OperationalError:
-            # Скорее всего, столбец уже существует
-            print("Column 'processed' likely already exists.")
 
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS callbacks (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                email TEXT,
-                phone TEXT NOT NULL,
-                lesson_type TEXT NOT NULL,
-                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-                processed INTEGER DEFAULT 0 /* 0 = не обработано, 1 = обработано */
-            )
-        ''')
-        conn.commit()
-        print("Table checked/updated.")
-        conn.close()
-    except sqlite3.Error as e:
-        print(f"Database error during init: {e}")
-        app.logger.error(f"Database error during init: {e}")
+# ===>>> ОПРЕДЕЛЕНИЕ МОДЕЛИ БАЗЫ ДАННЫХ <<<===
+# Теперь наша таблица описывается как Python-класс
+class Callback(db.Model):
+    __tablename__ = 'callbacks' # Явно указываем имя таблицы
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), nullable=True)
+    phone = db.Column(db.String(20), nullable=False)
+    lesson_type = db.Column(db.String(50), nullable=False)
+    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    processed = db.Column(db.Boolean, default=False, nullable=False)
 
+    def __repr__(self):
+        return f'<Callback {self.name} - {self.phone}>'
 
 # --- Функция отправки уведомления в Telegram ---
 def send_telegram_notification(chat_id, text):
@@ -177,16 +166,18 @@ def submit_callback():
     if consent != 'on': return jsonify({"success": False, "error": "Необходимо согласие на обработку данных."}), 400
 
     try:
-        conn = get_db()
-        cursor = conn.cursor()
-        cursor.execute(
-            "INSERT INTO callbacks (name, email, phone, lesson_type) VALUES (?, ?, ?, ?)",
-            (name, email if email else None, phone, lesson_type)
+        new_callback = Callback(
+            name=name,
+            email=email if email else None,
+            phone=phone,
+            lesson_type=lesson_type
         )
-        new_callback_id = cursor.lastrowid # Получаем ID новой записи
-        conn.commit()
-        conn.close()
-        app.logger.info(f"Новая заявка сохранена (ID: {new_callback_id}): Имя={name}, Телефон={phone}, Тип={lesson_type}, Email={email}")
+        db.session.add(new_callback)  # Добавляем новый объект в сессию
+        db.session.commit()  # Сохраняем изменения в БД
+
+        new_callback_id = new_callback.id  # Получаем ID после коммита
+        app.logger.info(
+            f"Новая заявка сохранена (ID: {new_callback_id}): Имя={name}, Телефон={phone}, Тип={lesson_type}, Email={email}")
 
         # ===>>> ОТПРАВКА УВЕДОМЛЕНИЯ В TELEGRAM <<<===
         notification_text = (
@@ -203,8 +194,13 @@ def submit_callback():
 
         return jsonify({"success": True, "message": "Заявка успешно отправлена!"})
 
-    except sqlite3.Error as e:
+
+    except Exception as e:  # Ловим более общую ошибку, т.к. теперь это не sqlite3.Error
+
+        db.session.rollback()  # Откатываем транзакцию в случае ошибки
+
         app.logger.error(f"Ошибка при записи в БД: {e}")
+
         return jsonify({"success": False, "error": "Произошла ошибка на сервере. Попробуйте позже."}), 500
 
 @app.route('/')
@@ -251,5 +247,4 @@ if __name__ == '__main__':
     if not BOT_TOKEN or not ADMIN_ID: # Дополнительная проверка перед запуском
         print("Ошибка: BOT_TOKEN или ADMIN_ID не установлены. Проверьте переменные окружения.")
     else:
-        init_db()
-        app.run(debug=True, host='0.0.0.0', port=5000)
+        app.run(debug=False, host='0.0.0.0', port=5000)
