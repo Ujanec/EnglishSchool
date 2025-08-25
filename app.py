@@ -11,7 +11,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# --- Конфигурация Flask ---
 app = Flask(__name__)
 
 # --- Конфигурация SQLAlchemy ---
